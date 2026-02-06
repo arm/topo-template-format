@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "topo-template-specification",
+  "type": "object",
+  "title": "Topo Template specification",
+  "description": "Schema for Topo Template files, extending the Compose specification.",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "x-topo": {
+          "type": "object",
+          "description": "Topo Template extension properties.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Unique identifier for the Template."
+            },
+            "description": {
+              "type": "string",
+              "description": "Multiline human-readable explanation of what the Template does."
+            },
+            "type": {
+              "enum": ["application", "library"],
+              "default": "application",
+              "description": "Declares how the template can be consumed. Supported values:\n- `library` — Provides reusable functionality intended to be integrated into other projects.\n- `application` — A project that composes other libraries or services."
+            },
+            "features": {
+              "type": "array",
+              "description": "Hardware features required or utilized (e.g., `SVE`, `NEON`, `SME`).",
+              "items": {
+                "type": "string"
+              }
+            },
+            "args": {
+              "type": "object",
+              "description": "Dictionary of build argument definitions.",
+              "additionalProperties": {
+                "type": "object",
+                "description": "Build argument definition.",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "Context displayed in user prompts."
+                  },
+                  "required": {
+                    "type": "boolean",
+                    "description": "If `true`, Implementations must enforce input or error"
+                  },
+                  "default": {
+                    "type": "string",
+                    "description": "Value used if user skips input (only valid when not required)"
+                  },
+                  "example": {
+                    "type": "string",
+                    "description": "Hint text displayed in help and prompts"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["name"]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "object",
+          "description": "The services that will be used by your application.\nEach one must specify `platform: linux/arm64` unless using `runtime: *remoteproc*` or `extends`.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "if": {
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": ["runtime"],
+                        "properties": {
+                          "runtime": {
+                            "type": "string",
+                            "pattern": "remoteproc"
+                          }
+                        }
+                      },
+                      {
+                        "required": ["extends"]
+                      }
+                    ]
+                  }
+                },
+                "then": {
+                  "required": ["platform"],
+                  "properties": {
+                    "platform": {
+                      "const": "linux/arm64",
+                      "description": "Template services must default to linux/arm64 to ensure compatibility with the target."
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "$ref": "https://raw.githubusercontent.com/compose-spec/compose-spec/refs/heads/main/schema/compose-spec.json"
+    }
+  ]
+}
