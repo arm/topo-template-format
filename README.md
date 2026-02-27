@@ -40,7 +40,7 @@ x-topo:
 - Machine-readable schema:
   - [`schema/topo-template-format.json`](schema/topo-template-format.json)
 
-## Discover topo templates
+## Discover Topo Templates
 
 Anyone can create and host their own `Implementations` of this Specification.
 
