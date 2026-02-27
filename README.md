@@ -1,6 +1,6 @@
 # Topo Template Format Specification
 
-Topo templates are deployable sample projects for Arm systems, with hardware-aware feature targeting and parameterization for board-specific tuning.
+Topo templates are hardware-aware, deployable sample projects for Arm-based Linux systems.
 The Topo Template Format Specification exists to make these templates easier to discover, validate and reuse.
 Templates are designed to be easy to deploy with [Topo](https://github.com/arm/topo/).
 
