@@ -1,14 +1,10 @@
 # Topo Template Format Specification
 
 Topo templates are hardware-aware, deployable sample projects for Arm-based Linux systems.
-The Topo Template Format Specification exists to make these templates easier to discover, validate and reuse.
+The Topo Template Format Specification exists to make these templates easier to discover, validate and reuse. It extends the standard [Compose Specification](https://compose-spec.io/) with an `x-topo` block for template metadata.
 Templates are designed to be easy to deploy with [Topo](https://github.com/arm/topo/).
 
 ## Core Concepts
-
-The Topo Template Format Specification extends the standard [Compose Specification](https://compose-spec.io/) with an `x-topo` block for template metadata.
-
-### Template, Project
 
 - **Template:** A reusable, parameterized repository defining one or more container services.
 - **Project**: A `compose.yaml` that consumes one or more Templates to build a runnable application.
