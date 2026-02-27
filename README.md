@@ -52,12 +52,12 @@ We welcome any contributors who wish to add their own template to the list to su
 If you want your template to be added to the template list:
 
 1. Go over [Authoring Templates section of the Specification](01-authoring-templates.md).
-2. [Validate Schema Compliance](./README.md#validate-schema-compliance) of your proposed template against this [Specification's schema](./schema/topo-template-format.json).
+2. [Validate Schema Compliance](./README.md#validate-schema-compliance) of your proposed template.
 3. Open a Pull Request in the `Topo` repository to update the [Topo template catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/templates.json).
 
 ### Validate Schema Compliance
 
-There are multiple ways of validating your Implementation depending on your development setup. Below we list a few options:
+The [machine-readable schema](schema/topo-template-format.json) to check any project against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling. Below we list some common choices:
 
 #### Validating Schema Compliance using VS Code
 
