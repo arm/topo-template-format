@@ -38,7 +38,7 @@ x-topo:
 
 ## Discover Topo Templates
 
-Anyone can create and host their own `Implementations` of this Specification.
+Anyone can create and host their own Implementations of this Specification.
 
 A curated list of templates can be found either via:
 
