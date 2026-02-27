@@ -61,7 +61,7 @@ The [machine-readable schema](schema/topo-template-format.json) to check any pro
 
 #### Validating Schema Compliance using VS Code
 
-Install the **YAML** extension, then map the schema to your template files in `.vscode/settings.json`:
+Install the [YAML extension](https://github.com/redhat-developer/vscode-yaml), then map the schema to your template files in `.vscode/settings.json`:
 
 ```json
 {
