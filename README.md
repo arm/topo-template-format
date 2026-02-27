@@ -34,6 +34,7 @@ x-topo:
   - [Overview](00-overview.md)
   - [Authoring Templates](01-authoring-templates.md)
   - [Parameterization](02-parameterization.md)
+  - [Schema Compliance](03-schema.md)
 - Machine-readable schema:
   - [`schema/topo-template-format.json`](schema/topo-template-format.json)
 
@@ -58,31 +59,12 @@ If you want your template to be added to the template list:
 
 ### Validate Schema Compliance
 
-The [machine-readable schema](schema/topo-template-format.json) to check any project against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling. Below we list some common choices:
+The [machine-readable schema](schema/topo-template-format.json) to check any project against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling.
 
-#### Validating Schema Compliance using VS Code
+For validation workflows, see:
 
-Install the [YAML extension](https://github.com/redhat-developer/vscode-yaml), then inline the schema's URL in your template files:
-
-```
-#yaml-language-server: $schema=https://raw.githubusercontent.com/arm/topo-template-format/refs/heads/main/schema/topo-template-format.json
-services:
-  # ...
-
-x-topo:
- # ...
-```
-
-Open `compose.yaml` and verify there are no schema errors in the Problems panel.
-
-#### Validating Schema Compliance using CLI
-
-You can validate any template `compose.yaml` from the command line with `check-jsonschema` in your own virtual environment:
-
-```sh
-pip install check-jsonschema
-check-jsonschema --schemafile schema/topo-template-format.json path/to/compose.yaml
-```
+- [Validating Schema Compliance using VS Code](03-schema-compliance.md#validating-schema-compliance-using-vs-code)
+- [Validating Schema Compliance using CLI](03-schema-compliance.md#validating-schema-compliance-using-cli)
 
 ## Versioning
 
