@@ -53,7 +53,7 @@ We welcome any contributors who wish to add their own template to the list to su
 
 If you want your template to be added to the template list:
 
-1. Go over [Authoring Templates section of the Specification](01-authoring-templates.md).
+1. Review the [Authoring Templates section of the Specification](01-authoring-templates.md).
 2. [Validate Schema Compliance](./README.md#validate-schema-compliance) of your proposed template.
 3. Open a Pull Request in the `Topo` repository to update the [Topo template catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/templates.json).
 
