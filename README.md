@@ -9,7 +9,7 @@ Templates are designed for configuration and deployment with [Topo](https://gith
 - **Template:** A set of reusable configuration files defining one or more container services and their parameters.
 - **Project**: A `compose.yaml` that consumes one or more Templates to build a runnable application.
 - **Implementation:** A tool or system that conforms to this specification (e.g., a CLI, GUI, or API that enables users to work with Templates and Projects).
-- **x-topo**: See the x-topo extension definition[here](./README.md#x-topo-extension).
+- **x-topo**: See the x-topo extension definition [below](./README.md#x-topo-extension).
 
 ### `x-topo` Extension
 
