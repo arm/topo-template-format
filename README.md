@@ -61,8 +61,8 @@ The [machine-readable schema](schema/topo-template-format.json) to check any tem
 
 For validation workflows, see:
 
-- [Validating Schema Compliance using VS Code](03-schema-compliance.md#validating-schema-compliance-using-vs-code)
-- [Validating Schema Compliance using CLI](03-schema-compliance.md#validating-schema-compliance-using-cli)
+- [Validating Schema Compliance in Your Editor](03-schema.md#validating-schema-compliance-in-your-editor)
+- [Validating Schema Compliance using CLI](03-schema.md#validating-schema-compliance-using-cli)
 
 ## Versioning
 
