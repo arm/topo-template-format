@@ -6,7 +6,6 @@ Templates are designed for configuration and deployment with [Topo](https://gith
 
 ## Core Concepts
 
-- **Template:** A set of reusable configuration files defining one or more container services and their parameters.
 - **Template:** A sample project (typically a git repository containing a `compose.yaml` with an `x-topo` metadata block, along with Dockerfiles and supporting source code) that defines one or more container services and their configurable parameters.
 - **Implementation:** A tool or system that conforms to this specification (e.g., a CLI, GUI, or API) and which can discover, validate, configure, and deploy templates.
 - **x-topo**: See the x-topo extension definition [below](./README.md#x-topo-extension).
