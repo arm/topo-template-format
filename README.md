@@ -59,7 +59,7 @@ If you want your template to be added to the template list:
 
 ### Validate Schema Compliance
 
-The [machine-readable schema](schema/topo-template-format.json) to check any project against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling.
+The [machine-readable schema](schema/topo-template-format.json) to check any template against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling.
 
 For validation workflows, see:
 
