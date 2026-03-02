@@ -42,10 +42,10 @@ x-topo:
 
 Anyone can create and host their own Implementations of this Specification.
 
-A curated list of templates can be found either via:
+A curated list of templates (Reference Implementations of the specification) can be found either via:
 
 - the [topo templates](https://github.com/arm/topo?tab=readme-ov-file#3-find-a-template) command or
-- the [topo catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/templates.json)
+- the [topo catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/templates.json).
 
 We welcome any contributors who wish to add their own template to the list to submit a Pull Request as indicated below.
 
