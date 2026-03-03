@@ -2,18 +2,7 @@
 
 This guide details how to create Topo Templates for the Topo ecosystem.
 
-## 1. Core Concepts
-
-- **Template:** A reusable, parameterized repository defining one or more container services.
-- **Project:** A `compose.yaml` that uses `extends:` to pull in Templates, providing argument values and customisations to compose an application.
-- **Implementation:** A tool or system that conforms to this specification (e.g., a CLI, GUI, or API that enables users to work with Templates and Projects).
-- **x-topo:** A metadata schema extension within standard [Compose](https://compose-spec.io) files that enables interactive features such as prompting, description display, and argument validation.
-
----
-
-## 2. Authoring Templates
-
-### File Structure
+## File Structure
 
 ```
 my-template/
@@ -22,7 +11,7 @@ my-template/
 └── ...            # Any other files supporting the service, e.g. source code
 ```
 
-### The compose.yaml
+## The compose.yaml
 
 You must extend the standard [Compose Spec](https://compose-spec.io) with `x-topo` metadata. In addition, all template services must explicitly set `platform: linux/arm64` so Implementations target Arm64. The only exception is for services deployed via remoteproc.
 
@@ -50,7 +39,7 @@ x-topo:
       example: "Hello from Arm!"
 ```
 
-### The Dockerfile
+## The Dockerfile
 
 Implementations pass arguments via standard Docker `ARG` directives.
 
