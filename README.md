@@ -1,31 +1,35 @@
 # Topo Template Format Specification
 
-Topo templates are configurable sample projects designed to be deployed on Arm-based Linux systems.
-The Topo Template Format Specification extends the [Compose Specification](https://compose-spec.io/) with an `x-topo` block that describes a template's identity, requirements, and configurable parameters. This makes templates easier to discover, validate, and reuse.
-Templates are designed for configuration and deployment with [Topo](https://github.com/arm/topo/), and can be used by any community-developed tools that align with this specification.
+A Topo Template is a containerized sample project for Arm-based Linux systems. At minimum, it is a directory containing a `compose.yaml`, Dockerfiles, and source code, with an `x-topo` metadata block that describes what the template does, what hardware features it needs, and what parameters a user can configure.
 
-## Core Concepts
+This specification defines the `x-topo` extension. It was developed for use with [Topo](https://github.com/arm/topo/), but this is an open spec and any tool can read and act on `x-topo` metadata to discover, validate, and deploy templates.
 
-- **Template:** A sample project (typically a git repository containing a `compose.yaml` with an `x-topo` metadata block, along with Dockerfiles and supporting source code) that defines one or more container services and their configurable parameters.
-- **Implementation:** A tool or system that conforms to this specification (e.g., a CLI, GUI, or API) and which can discover, validate, configure, and deploy templates.
-- **x-topo**: See the x-topo extension definition [below](./README.md#x-topo-extension).
+## How It Works
 
-### `x-topo` Extension
-
-A metadata schema extension within standard [Compose](https://compose-spec.io) files that enables interactive features such as prompting, description display, and argument validation. Topo metadata lives at the root of `compose.yaml`:
+A template's `compose.yaml` is a standard [Compose](https://compose-spec.io/) file with an `x-topo` block at the root:
 
 ```yaml
+services:
+  app:
+    platform: linux/arm64
+    build:
+      context: .
+      args:
+        GREETING: "Hello, World"
+
 x-topo:
   name: "hello-world"
-  description: "Template description"
+  description: "A simple greeting app for Arm"
   type: "application"
-  features: ["NEON", "SVE"]
+  features: ["NEON"]
   args:
     GREETING:
       description: "Message shown by the app"
       required: true
       example: "Hello from Arm"
 ```
+
+Because this is valid Compose, any template can be run with plain `docker compose`. The `x-topo` block is what allows tools like Topo to add interactive configuration, argument validation, and hardware feature filtering on top.
 
 ## Specification
 
