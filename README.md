@@ -39,7 +39,6 @@ x-topo:
 
 ## Discover Topo Templates
 
-
 A curated list of example templates can be found either via:
 
 - the [topo templates](https://github.com/arm/topo?tab=readme-ov-file#3-find-a-template) command or
