@@ -10,7 +10,7 @@ Templates support parameterization through Docker build arguments:
 ## How Parameterization Works
 
 Templates extend [compose-spec](https://compose-spec.io/) with `x-topo.args` to define and document build arguments.
-Unless a service is intended for remoteproc targets, every service definition in these examples (and in compliant templates) must include `platform: linux/arm64`. Remoteproc services omit `platform` but must set `remoteproc` as their `runtime` so Implementations can recognize the exception.
+Unless a service is intended for a remote processor, every service definition in these examples (and in compliant Templates) must include `platform: linux/arm64`. Remote processor services omit `platform` but must set `remoteproc` as their `runtime` so Implementations can recognize the exception.
 
 **compose.yaml**
 
