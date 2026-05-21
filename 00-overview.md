@@ -100,6 +100,7 @@ x-topo:
   description: string # Optional
   type: string # Optional, defaults to "application"
   features: [string] # Optional
+  deploy_success_message: string # Optional
   args: # Optional
     <ARG_NAME>:
       description: string # Optional
@@ -124,6 +125,9 @@ Declares how the template can be consumed. Supported values:
 
 **`features`** (array of strings, optional)
 Hardware features required or utilized (e.g., `SVE`, `NEON`, `SME`).
+
+**`deploy_success_message`** (string, optional)
+Message displayed to the user after a successful deployment. If omitted, a default message is shown.
 
 **`args`** (object, optional)
 Dictionary of build argument definitions. Each key is an argument name (e.g., `GREETING`) with the following properties:
