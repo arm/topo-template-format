@@ -4,7 +4,7 @@ The Topo Template Format project is open for external contributors, and welcomes
 
 Topo Template Format is licensed under the [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) license and all accepted contributions must have the same license.
 
-## Contributing code to Topo Template Format
+## Contributing Code to Topo Template Format
 
 - Before this project accepts your contribution, you need to certify its origin and give us your permission. To manage this process, we use [Developer Certificate of Origin (DCO) V1.1](https://developercertificate.org/).
   To indicate that contributors agree to the terms of the DCO, it's necessary to "sign off" the contribution by adding a line with your name and email address to every git commit message:

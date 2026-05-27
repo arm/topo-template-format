@@ -13,7 +13,7 @@ my-template/
 
 ## The compose.yaml
 
-You must extend the standard [Compose Spec](https://compose-spec.io) with `x-topo` metadata. In addition, all template services must explicitly set `platform: linux/arm64` so Implementations target Arm64. The only exception is for services deployed via remoteproc.
+You must extend the standard [Compose Spec](https://compose-spec.io) with `x-topo` metadata. In addition, all Template services must explicitly set `platform: linux/arm64` so Implementations target Arm64. The only exception is for services deployed via remoteproc.
 
 ```yaml
 services:
@@ -86,7 +86,7 @@ Use the Topo CLI to verify your Templates locally.
 # Create a compose.yaml
 topo init
 
-# Use your template using the local directory option `dir:`
+# Use your Template using the local directory option `dir:`
 topo extend compose.yaml dir:./path/to/my-template
 
 # The CLI will prompt for arguments specified in your service

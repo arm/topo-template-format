@@ -8,7 +8,7 @@ A Topo Template is a repository that defines one or more container services usin
   - _Should_ contain a `x-topo` attribute defining the required fields
     - see [x-topo schema](#x-topo-schema)
   - _Must_ define one or more valid [services](https://github.com/compose-spec/compose-spec/blob/main/05-services.md)
-  - _Must_ set `platform: linux/arm64` on every service unless that service uses a remoteproc runtime
+  - _Must_ set `platform: linux/arm64` on every service unless that service uses Remoteproc Runtime
 - _Could_ Be a git repo
 
 ## Examples
@@ -84,9 +84,9 @@ This allows Templates to be runnable with plain `docker compose` while Implement
 
 ## Use Cases
 
-- A zephyr starter program compatible with [Remoteproc Runtime](https://github.com/arm/remoteproc-runtime)
+- A Zephyr starter program compatible with [Remoteproc Runtime](https://github.com/arm/remoteproc-runtime)
 - An LLM model running on an Arm-SIMD optimised (e.g. KleidiAI) inference back-end
-- A Template running on the Linux host Cortex-A and another service running on the Cortex-M, with both services co-ordinating over RPMsg
+- A Template with one service running on the primary OS and another running on a remote processor, with both services co-ordinating over RPMsg
 
 ## x-topo Schema
 
@@ -117,13 +117,13 @@ Unique identifier for the Template.
 Multiline human-readable explanation of what the Template does.
 
 **`type`** (string, optional, default: `application`)
-Declares how the template can be consumed. Supported values:
+Declares how the Template can be consumed. Supported values:
 
 - `library` — Provides reusable functionality intended to be integrated into other projects.
 - `application` — A project that composes other libraries or services.
 
 **`features`** (array of strings, optional)
-Hardware features required or utilized (e.g., `SVE`, `NEON`, `SME`).
+Target features required or utilised by the Template (e.g., `SVE`, `NEON`, `SME`).
 
 **`args`** (object, optional)
 Dictionary of build argument definitions. Each key is an argument name (e.g., `GREETING`) with the following properties:

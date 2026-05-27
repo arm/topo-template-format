@@ -4,7 +4,7 @@ The [machine-readable schema](schema/topo-template-format.json) to check any pro
 
 ## Validating Schema Compliance in Your Editor
 
-The schema can be associated with a template file using a [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) modeline comment. Add the following line to the top of your `compose.yaml`:
+The schema can be associated with a Template file using a [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) modeline comment. Add the following line to the top of your `compose.yaml`:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/arm/topo-template-format/refs/heads/main/schema/topo-template-format.json
@@ -22,7 +22,7 @@ This works in any editor that uses yaml-language-server, including:
 
 ## Validating Schema Compliance using CLI
 
-You can validate any template `compose.yaml` from the command line with `check-jsonschema` in your own virtual environment:
+You can validate any Template `compose.yaml` from the command line with `check-jsonschema` in your own virtual environment:
 
 ```sh
 pip install check-jsonschema
