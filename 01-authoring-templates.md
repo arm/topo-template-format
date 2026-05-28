@@ -68,7 +68,7 @@ x-topo:
   description: string # Optional
   type: string # Optional, defaults to "application"
   features: [string] # Optional
-  deploy_success_message: string # Optional
+  deployment_success_message: string # Optional
   args: # Optional
     <ARG_NAME>:
       description: string # Optional
