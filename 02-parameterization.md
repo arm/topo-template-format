@@ -100,7 +100,7 @@ missing_args:
 
 ## Argument Hints
 
-Argument definitions may include `hints`, an advisory metadata map that Implementations can use to discover, filter, or suggest suitable argument values. Hints do not define validation constraints, and Implementations may ignore hints they do not understand.
+Argument definitions may include `hints`, which Implementations can use to discover, filter, or suggest suitable argument values. Hints do not define validation constraints, and Implementations may ignore hints they do not understand.
 
 Hint keys must use lowercase dotted namespaces to avoid collisions, such as `huggingface.task` or `file.format`. Hint values may be strings, numbers, booleans, or arrays of those scalar values.
 
