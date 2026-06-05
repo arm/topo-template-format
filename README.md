@@ -51,6 +51,27 @@ A curated list of example Templates can be found either via:
 
 We welcome any contributors who wish to add their own Template to the list to submit a Pull Request as indicated below.
 
+## Authoring Skills
+
+This repository includes public agent skills that help authors create and validate Topo Templates.
+
+- `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
+- `topo-template-lint`: validates that a Topo Template `compose.yaml` contains a top-level `x-topo` attribute and conforms to the Topo Template Format schema.
+- `topo-template-optimise`: reviews and improves an existing Topo Template for maintainability, parameterization, Arm64 readiness, image quality, and user experience.
+
+### Installing Skills
+
+Standard install:
+
+```sh
+mkdir -p ~/.agents/skills
+cp -R .agents/skills/topo-template-bootstrap ~/.agents/skills/
+cp -R .agents/skills/topo-template-lint ~/.agents/skills/
+cp -R .agents/skills/topo-template-optimise ~/.agents/skills/
+```
+
+Restart your agent after installing.
+
 ## Propose Your Template to Topo
 
 If you want your Template to be added to the Template list:
