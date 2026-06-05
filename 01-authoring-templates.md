@@ -29,7 +29,6 @@ x-topo:
   name: "hello-world"
   description: |
     A simple Hello World service with a customizable greeting.
-  type: "application"
   # ARGUMENT DEFINITIONS
   # These enable interactive prompting behavior.
   args:
@@ -66,7 +65,6 @@ The `x-topo` block must be placed at the root of your YAML file.
 x-topo:
   name: string # Required
   description: string # Optional
-  type: string # Optional, defaults to "application"
   features: [string] # Optional
   deployment_success_message: string # Optional
   args: # Optional

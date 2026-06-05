@@ -22,7 +22,6 @@ services:
 x-topo:
   name: "hello-world"
   description: "A simple greeting app for Arm"
-  type: "application"
   features: ["NEON"]
   args:
     GREETING:

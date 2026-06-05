@@ -32,7 +32,6 @@ x-topo:
   name: "kleidi-llm" # Required
   description: |
     Run an LLM locally using KleidiAI optimised inference on Arm CPU
-  type: "library" # Optional
   features:
     - "SME"
     - "NEON"
@@ -66,7 +65,6 @@ x-topo:
   name: "kleidi-llm-webui"
   description: |
     Run an LLM chat web app with Kleidi inference
-  type: "application"
   features:
     - "SME"
     - "NEON"
@@ -98,7 +96,6 @@ The `x-topo` extension provides metadata for Templates. If included, it must be 
 x-topo:
   name: string # Required
   description: string # Optional
-  type: string # Optional, defaults to "application"
   features: [string] # Optional
   deployment_success_message: string # Optional
   args: # Optional
@@ -116,12 +113,6 @@ Unique identifier for the Template.
 
 **`description`** (string, optional)
 Multiline human-readable explanation of what the Template does.
-
-**`type`** (string, optional, default: `application`)
-Declares how the Template can be consumed. Supported values:
-
-- `library` — Provides reusable functionality intended to be integrated into other projects.
-- `application` — A project that composes other libraries or services.
 
 **`features`** (array of strings, optional)
 Target features required or utilised by the Template (e.g., `SVE`, `NEON`, `SME`).
