@@ -64,10 +64,7 @@ This repository includes public agent skills that help authors create and valida
 Standard install:
 
 ```sh
-mkdir -p ~/.agents/skills
-cp -R .agents/skills/topo-template-bootstrap ~/.agents/skills/
-cp -R .agents/skills/topo-template-lint ~/.agents/skills/
-cp -R .agents/skills/topo-template-optimise ~/.agents/skills/
+scripts/install_skills.sh
 ```
 
 Restart your agent after installing.

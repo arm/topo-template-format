@@ -21,10 +21,7 @@ Public agent skills live under `.agents/skills/`.
 To develop skills, install them as symlinks.
 
 ```sh
-mkdir -p ~/.agents/skills
-ln -s "$PWD/.agents/skills/topo-template-bootstrap" ~/.agents/skills/topo-template-bootstrap
-ln -s "$PWD/.agents/skills/topo-template-lint" ~/.agents/skills/topo-template-lint
-ln -s "$PWD/.agents/skills/topo-template-optimise" ~/.agents/skills/topo-template-optimise
+scripts/install_skills.sh --symlink
 ```
 
 Each installable skill folder should be self-contained, but shared Topo Template context is maintained in `.agents/skills/_shared/topo-template-context.md` to avoid hand-edited drift across skills. After editing that shared context, update the embedded generated blocks in each skill:
