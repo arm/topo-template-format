@@ -6,17 +6,20 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source_dir="$repo_root/.agents/skills"
 target_dir="${AGENTS_SKILLS_DIR:-$HOME/.agents/skills}"
 mode="copy"
+skip_status=125
+install_failed=0
 shopt -s nullglob
 
 usage() {
   printf 'Usage: %s [--copy|--symlink]\n' "$(basename "$0")"
   printf '\n'
   printf 'Installs skills from .agents/skills to %s.\n' "$target_dir"
+  printf 'Set AGENTS_SKILLS_DIR to override the install directory.\n'
   printf 'Use --symlink when developing skills in this checkout.\n'
 }
 
 print_command() {
-  printf '+'
+  printf '>'
   printf ' %q' "$@"
   printf '\n'
 }
@@ -28,7 +31,7 @@ run_command() {
     [Yy] | [Yy][Ee][Ss]) "$@" ;;
     *)
       printf 'Skipped.\n'
-      return 1
+      return "$skip_status"
       ;;
   esac
 }
@@ -36,7 +39,7 @@ run_command() {
 remove_existing_skill() {
   local target_path="$1"
 
-  printf 'Installed skill directory already exists at: %s\n' "$target_path"
+  printf 'Skill directory already exists at: %s\n' "$target_path"
   printf 'Delete it so this installer can overwrite it?\n'
   print_command rm -rf "$target_path"
   read -r -p 'Delete existing skill? [y/N] ' answer
@@ -44,7 +47,7 @@ remove_existing_skill() {
     [Yy] | [Yy][Ee][Ss]) rm -rf "$target_path" ;;
     *)
       printf 'Skipped. Existing skill directory was left unchanged.\n'
-      return 1
+      return "$skip_status"
       ;;
   esac
 }
@@ -88,10 +91,28 @@ for source_path in "${skill_paths[@]}"; do
 
   if [[ "$mode" == "copy" ]]; then
     if [[ -e "$target_path" || -L "$target_path" ]]; then
-      remove_existing_skill "$target_path" || continue
+      if remove_existing_skill "$target_path"; then
+        :
+      else
+        status=$?
+        if (( status != skip_status )); then
+          printf 'Failed to remove existing skill: %s\n' "$target_path" >&2
+          install_failed=1
+        fi
+        continue
+      fi
     fi
 
-    run_command cp -R "$source_path" "$target_dir/" || continue
+    if run_command cp -R "$source_path" "$target_dir/"; then
+      :
+    else
+      status=$?
+      if (( status != skip_status )); then
+        printf 'Failed to install skill: %s\n' "$skill" >&2
+        install_failed=1
+      fi
+      continue
+    fi
   else
     if [[ -L "$target_path" && "$(readlink "$target_path")" == "$source_path" ]]; then
       printf 'Already linked: %s\n' "$target_path"
@@ -99,11 +120,34 @@ for source_path in "${skill_paths[@]}"; do
     fi
 
     if [[ -e "$target_path" || -L "$target_path" ]]; then
-      remove_existing_skill "$target_path" || continue
+      if remove_existing_skill "$target_path"; then
+        :
+      else
+        status=$?
+        if (( status != skip_status )); then
+          printf 'Failed to remove existing skill: %s\n' "$target_path" >&2
+          install_failed=1
+        fi
+        continue
+      fi
     fi
 
-    run_command ln -s "$source_path" "$target_path" || continue
+    if run_command ln -s "$source_path" "$target_path"; then
+      :
+    else
+      status=$?
+      if (( status != skip_status )); then
+        printf 'Failed to install skill: %s\n' "$skill" >&2
+        install_failed=1
+      fi
+      continue
+    fi
   fi
 done
+
+if (( install_failed != 0 )); then
+  printf 'One or more skills failed to install.\n' >&2
+  exit 1
+fi
 
 printf 'Restart your agent after installing skills.\n'
