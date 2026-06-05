@@ -27,7 +27,6 @@ services:
 
 x-topo:
   name: "Topo Welcome"
-  type: "application"
 
   # Build argument metadata for interactive prompting
   args:
@@ -185,7 +184,6 @@ services:
 
 x-topo:
   name: "My Template"
-  type: "application"
   args:
     MODEL:
       description: "hugging face model ID to use"

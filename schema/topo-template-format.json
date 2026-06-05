@@ -20,11 +20,6 @@
               "type": "string",
               "description": "Multiline human-readable explanation of what the Template does."
             },
-            "type": {
-              "enum": ["application", "library"],
-              "default": "application",
-              "description": "Declares how the Template can be consumed. Supported values:\n- `library` — Provides reusable functionality intended to be integrated into other projects.\n- `application` — A project that composes other libraries or services."
-            },
             "features": {
               "type": "array",
               "description": "Target features required or utilised by the Template (e.g., `SVE`, `NEON`, `SME`).",
