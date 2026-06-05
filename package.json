@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "Topo Template Format documentation",
   "scripts": {
-    "md2confluence": "node scripts/md2confluence.js",
     "format": "prettier --write .",
     "check": "prettier --check ."
   },
   "devDependencies": {
-    "@shogobg/markdown2confluence": "^0.1.11",
     "prettier": "^3.8.1"
   }
 }
