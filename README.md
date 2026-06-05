@@ -56,8 +56,8 @@ We welcome any contributors who wish to add their own Template to the list to su
 This repository includes public agent skills that help authors create and validate Topo Templates.
 
 - `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
+- `topo-template-context`: provides Topo and Topo Template reference context for questions about `x-topo` metadata, schema, docs, and CLI Template behavior.
 - `topo-template-lint`: validates that a Topo Template `compose.yaml` contains a top-level `x-topo` attribute and conforms to the Topo Template Format schema.
-- `topo-template-optimise`: reviews and improves an existing Topo Template for maintainability, parameterization, Arm64 readiness, image quality, and user experience.
 
 ### Installing Skills
 
