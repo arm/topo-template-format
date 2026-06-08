@@ -8,52 +8,46 @@ const context_path = path.join(
   "_shared",
   "topo-template-context.md",
 );
-const begin_marker = "<!-- BEGIN GENERATED: topo-template-context -->";
-const end_marker = "<!-- END GENERATED: topo-template-context -->";
+const reference_path = path.join("references", "topo-template-context.md");
 
 const check = process.argv.includes("--check");
-const context = fs.readFileSync(context_path, "utf8").trim();
+const canonical_context = fs.readFileSync(context_path, "utf8");
 
 const skill_paths = fs
   .readdirSync(skills_dir, { withFileTypes: true })
   .filter(
     (entry) => entry.isDirectory() && entry.name.startsWith("topo-template-"),
   )
-  .map((entry) => path.join(skills_dir, entry.name, "SKILL.md"))
-  .filter((skill_path) => fs.existsSync(skill_path));
+  .map((entry) => path.join(skills_dir, entry.name))
+  .filter((skill_dir) => fs.existsSync(path.join(skill_dir, "SKILL.md")));
 
 let stale = false;
 
-for (const skill_path of skill_paths) {
-  const original = fs.readFileSync(skill_path, "utf8");
-  const begin_index = original.indexOf(begin_marker);
-  const end_index = original.indexOf(end_marker);
+for (const skill_dir of skill_paths) {
+  const skill_reference_path = path.join(skill_dir, reference_path);
+  const relative_path = path.relative(root, skill_reference_path);
+  const reference_context_copy = fs.existsSync(skill_reference_path)
+    ? fs.readFileSync(skill_reference_path, "utf8")
+    : null;
 
-  if (begin_index === -1 || end_index === -1 || end_index < begin_index) {
-    throw new Error(
-      `${path.relative(root, skill_path)} is missing generated context markers`,
-    );
-  }
-
-  const before = original.slice(0, begin_index + begin_marker.length);
-  const after = original.slice(end_index);
-  const updated = `${before}\n${context}\n${after}`;
-
-  if (updated !== original) {
+  if (reference_context_copy !== canonical_context) {
     stale = true;
-    const relative_path = path.relative(root, skill_path);
 
     if (check) {
-      console.error(`${relative_path} has stale generated context`);
+      const state = reference_context_copy === null ? "missing" : "stale";
+      console.error(`${relative_path} is ${state}`);
       continue;
     }
 
-    fs.writeFileSync(skill_path, updated);
+    fs.mkdirSync(path.dirname(skill_reference_path), { recursive: true });
+    fs.writeFileSync(skill_reference_path, canonical_context);
     console.log(`Updated ${relative_path}`);
   }
 }
 
 if (check && stale) {
-  console.error("Run `npm run sync:skills` to update generated skill context.");
+  console.error(
+    "Run `npm run sync:skills` to update skill context references.",
+  );
   process.exit(1);
 }

@@ -24,13 +24,13 @@ To test skills from this checkout while developing them, install the local repos
 npx skills add . --global
 ```
 
-Each installable skill folder should be self-contained, but shared Topo Template context is maintained in `skills/_shared/topo-template-context.md` to avoid hand-edited drift across skills. After editing that shared context, update the embedded generated blocks in each skill:
+Each installable skill folder should be self-contained, but shared Topo Template context is maintained in `skills/_shared/topo-template-context.md` to avoid hand-edited drift across skills. After editing that shared context, update each skill's `references/topo-template-context.md` copy:
 
 ```bash
 npm run sync:skills
 ```
 
-Check that generated skill context is current:
+Check that skill context references are current:
 
 ```bash
 npm run check:skills
