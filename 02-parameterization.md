@@ -4,7 +4,7 @@
 
 Templates support parameterization through Docker build arguments:
 
-- `x-topo.args` defines argument metadata (description, whether required, examples)
+- `x-topo.args` defines argument metadata (description, whether required, examples, and advisory hints)
 - Standard Compose `build.args` provides argument values
 
 ## How Parameterization Works
@@ -96,6 +96,28 @@ missing_args:
       required: true
       example: "Hello from Arm SME"
 ```
+
+## Argument Hints
+
+Argument definitions may include `hints`, which Implementations can use to discover, filter, or suggest suitable argument values. Hints do not define validation constraints, and Implementations may ignore hints they do not understand.
+
+Hint keys must use lowercase dotted namespaces to avoid collisions, such as `huggingface.task` or `file.format`. Hint values may be strings, numbers, booleans, or arrays of those scalar values.
+
+```yaml
+x-topo:
+  args:
+    MODEL:
+      description: "Model artifact reference"
+      default: "bartowski/Qwen_Qwen3.5-0.8B-GGUF:SmolLM2-135M-Instruct-Q4_K_M.gguf"
+      hints:
+        huggingface.task: text-generation
+        file.format: gguf
+```
+
+Recommended hint key conventions include:
+
+- `huggingface.task` — suggests a Hugging Face task or pipeline filter, such as `text-generation`
+- `file.format` — suggests a desired artifact or file format, such as `gguf`
 
 ### Processing Steps
 
