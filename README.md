@@ -61,13 +61,15 @@ This repository includes public agent skills that help authors create and valida
 
 ### Installing Skills
 
-Standard install:
+The can install the skills with [`npx skills`](https://github.com/vercel-labs/skills):
 
 ```sh
-scripts/install_skills.sh
+npx skills add arm/topo-template-format
 ```
 
-Restart your agent after installing.
+Or install the skills manually by copying or symlinking the directories under `.agents/skills/` into your agent's skills directory.
+
+Restart your agent after installing or updating skills.
 
 ## Propose Your Template to Topo
 

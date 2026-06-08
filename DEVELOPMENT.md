@@ -18,10 +18,10 @@ npx run format
 
 Public agent skills live under `.agents/skills/`.
 
-To develop skills, install them as symlinks.
+To test skills from this checkout while developing them, install the local repository with `npx skills`. Choose symlinks when prompted if you want edits in this checkout to be reflected immediately.
 
 ```sh
-scripts/install_skills.sh --symlink
+npx skills add . --global
 ```
 
 Each installable skill folder should be self-contained, but shared Topo Template context is maintained in `.agents/skills/_shared/topo-template-context.md` to avoid hand-edited drift across skills. After editing that shared context, update the embedded generated blocks in each skill:
