@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const skills_dir = path.join(root, ".agents", "skills");
+const skills_dir = path.join(root, "skills");
 const context_path = path.join(
   skills_dir,
   "_shared",
