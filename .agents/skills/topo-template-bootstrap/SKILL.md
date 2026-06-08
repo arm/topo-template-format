@@ -19,7 +19,7 @@ Use Topo vocabulary precisely:
 - Target: the Arm64 Linux system where the deployment runs.
 - Template: a containerized sample project containing `compose.yaml`, supporting files such as Dockerfiles and source, and `x-topo` metadata.
 - X-Topo: the Compose extension key, written `x-topo`, that describes Template identity, type, hardware features, deploy message, and configurable build arguments.
-- Feature: a hardware capability required or used by the Template, such as `NEON`, `SVE`, `SME`, a GPU, or an NPU.
+- Feature: a Target hardware capability required or used by the Template, such as `NEON`, `SVE`, `SME`, a GPU, or an NPU.
 - Remote processor: a peer execution environment managed from Linux, usually through Remoteproc Runtime and `runtime: remoteproc` services.
 - Parameterization: Template configuration through Docker build arguments, with prompts and validation described in `x-topo.args` and actual values carried through Compose `build.args`.
 
