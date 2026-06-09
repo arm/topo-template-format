@@ -51,6 +51,26 @@ A curated list of example Templates can be found either via:
 
 We welcome any contributors who wish to add their own Template to the list to submit a Pull Request as indicated below.
 
+## Authoring Skills
+
+This repository includes public agent skills that help authors create and validate Topo Templates.
+
+- `topo-template-context`: provides Topo and Topo Template reference context for questions about `x-topo` metadata, schema, docs, and CLI Template behavior.
+- `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
+- `topo-template-lint`: reviews an existing Topo Template for correctness, consistency, and authoring best practices.
+
+### Installing Skills
+
+You can install the skills with [`npx skills`](https://github.com/vercel-labs/skills):
+
+```sh
+npx skills add arm/topo-template-format
+```
+
+Or install the skills manually by copying or symlinking the directories under `skills/` into your agent's skills directory.
+
+Restart your agent after installing or updating skills.
+
 ## Propose Your Template to Topo
 
 If you want your Template to be added to the Template list:
