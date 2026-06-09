@@ -58,6 +58,7 @@ This repository includes public agent skills that help authors create and valida
 - `topo-template-context`: provides Topo and Topo Template reference context for questions about `x-topo` metadata, schema, docs, and CLI Template behavior.
 - `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
 - `topo-template-lint`: reviews an existing Topo Template for correctness, consistency, and authoring best practices.
+- `topo-template-benchmark`: benchmarks and improves `topo deploy` or Docker build performance for initial deployment and iteration workflows.
 
 ### Installing Skills
 
