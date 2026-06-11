@@ -41,4 +41,5 @@ Before acting, read `references/topo-template-context.md` for shared Topo Templa
 
 ## Reporting
 
-Report the priority selected, benchmark command, edited files, exact optimization made, measured before and after results, and any caveats such as missing Target testing or unsupported build engine behavior.
+Report the priority selected, benchmark command, bottleneck hypothesis, diagnostic fact that supported it, edited files, exact optimization made, measured before and after results, and why the chosen change was the smallest change likely to improve the selected benchmark. Include any caveats such as missing Target testing or unsupported build engine behavior.
+When benchmarking, record benchmarking results in `./template-benchmarking.md`. Create this if it doesn't exist, read it first if you find it in the repo. Use this to track results over time.
