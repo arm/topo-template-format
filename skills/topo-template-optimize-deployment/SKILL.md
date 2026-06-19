@@ -1,9 +1,9 @@
 ---
-name: topo-template-benchmark
-description: Improve Topo Template deployment performance by benchmarking topo deploy or docker compose build, then making the highest-leverage Docker build optimization.
+name: topo-template-optimize-deployment
+description: Optimize Topo Template deployment or development iteration performance by measuring the current bottleneck and applying the highest-leverage Docker build improvement.
 ---
 
-# Topo Template Benchmark
+# Topo Template - Optimize Deployment
 
 Use this skill when the user asks to make `topo deploy`, Docker builds, initial deployment, or development iteration faster for a Topo Template.
 
