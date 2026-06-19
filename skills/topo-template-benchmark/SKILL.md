@@ -18,6 +18,7 @@ Before acting, read `references/topo-template-context.md` for shared Topo Templa
 1. Check whether `topo` is installed. If it is, ask the user for an SSH Target and benchmark with `topo deploy --target <ssh-target>`. If `topo` is unavailable or the user cannot provide a Target, benchmark with `docker compose build`.
 1. Inspect `compose.yaml`, Dockerfiles, `.dockerignore`, dependency manifests, and source layout to find cache invalidation boundaries and expensive build steps.
 1. Before editing, identify and write down the current bottleneck hypothesis from benchmark output. If using `topo deploy`, treat it as the authoritative end-to-end benchmark. If the build phase is suspected but the Topo output does not clearly show the cause, run `docker compose build --progress=plain` as a diagnostic and extract three facts: the slowest non-cached build step, the first unexpected cache miss, and the build context transfer size. Choose the optimization that directly addresses one of those facts. Do not make generic Dockerfile cleanup changes unless they are tied to the recorded bottleneck.
+1. Treat `x-topo.args` defaults and Compose `build.args` defaults as product behavior, not ordinary benchmark tuning knobs. Do not change a default value, such as a model, dataset, precision mode, feature flag, or runtime option, as the first optimization attempt just because it makes the benchmark faster.
 1. Choose one high-leverage optimization. Prefer the smallest change likely to improve the selected scenario.
 1. Take a baseline. To do this, ensure the docker build cache for the build images is clear first. Record the baseline in `./template-benchmarking.md`.
 1. Apply the change, then re-run the same benchmark path used for the baseline. Update the same `./template-benchmarking.md` entry with the after-change result.
@@ -61,6 +62,7 @@ If an attempt stops before an after-change benchmark, still record the baseline,
 - Use BuildKit cache mounts for package managers, compiler caches, model downloads, Git object stores, or similar local rebuild accelerators when the build engine supports them.
 - Use registry-backed build cache only when a shared registry and cache population workflow exist or the user explicitly wants CI or multi-host cache reuse.
 - Avoid adding non-standard Compose keys. Build settings must remain valid Compose build configuration.
+- Avoid changing user-facing Template defaults to improve benchmark results. A default argument change is acceptable only when the user explicitly asks for a product trade-off, or when the current default is demonstrably wrong and the replacement preserves intended behavior. If proposing such a change, call it out as a behavior/product change rather than a Docker build optimization.
 - Do not introduce a large pre-baked base image without explaining the registry storage, rebuild, and publishing trade-offs.
 
 ## Reporting
