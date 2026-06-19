@@ -12,14 +12,15 @@ Before acting, read `references/topo-template-context.md` for shared Topo Templa
 ## Workflow
 
 1. Identify the Template root. Prefer the repository directory containing the root-level `compose.yaml`.
+1. Read `./template-benchmarking.md` in the Template root if it exists. Create it when recording the first benchmark entry.
 1. Ask whether the user wants to prioritize initial deployment time or iteration time.
 1. If the user prioritizes iteration time, inspect the project and identify the most likely frequent edit path, such as Python source, C/C++ source, model files, dependency manifests, or configuration. Ask the user to confirm the change type to optimize for before editing.
 1. Check whether `topo` is installed. If it is, ask the user for an SSH Target and benchmark with `topo deploy --target <ssh-target>`. If `topo` is unavailable or the user cannot provide a Target, benchmark with `docker compose build`.
 1. Inspect `compose.yaml`, Dockerfiles, `.dockerignore`, dependency manifests, and source layout to find cache invalidation boundaries and expensive build steps.
 1. Before editing, identify and write down the current bottleneck hypothesis from benchmark output. If using `topo deploy`, treat it as the authoritative end-to-end benchmark. If the build phase is suspected but the Topo output does not clearly show the cause, run `docker compose build --progress=plain` as a diagnostic and extract three facts: the slowest non-cached build step, the first unexpected cache miss, and the build context transfer size. Choose the optimization that directly addresses one of those facts. Do not make generic Dockerfile cleanup changes unless they are tied to the recorded bottleneck.
 1. Choose one high-leverage optimization. Prefer the smallest change likely to improve the selected scenario.
-1. Take a baseline. To do this, ensure the docker build cache for the build images is clear first.
-1. Apply the change, then re-run the same benchmark path used for the baseline.
+1. Take a baseline. To do this, ensure the docker build cache for the build images is clear first. Record the baseline in `./template-benchmarking.md`.
+1. Apply the change, then re-run the same benchmark path used for the baseline. Update the same `./template-benchmarking.md` entry with the after-change result.
 1. Report the baseline, change, result, and remaining likely bottlenecks. Encourage the user to start a new chat session for the next incremental optimization.
 
 ## Benchmarking
@@ -29,7 +30,29 @@ Before acting, read `references/topo-template-context.md` for shared Topo Templa
 - Use `docker compose build` as the fallback when there is no Topo Target or `topo` is unavailable.
 - Capture enough output to identify slow steps and cache misses, not just total wall-clock time.
 - If optimizing iteration time, run or request a representative edit before the after-change benchmark when practical.
-- Clear Docker caches as necessary to establish representative timings. Ask for user permission do to this _once_, remembering their decision if they consent.
+- Clear Docker caches as necessary to establish representative timings. Ask for user permission to do this _once_, remembering their decision if they consent.
+
+## Benchmark Log
+
+Record benchmark results in `./template-benchmarking.md` in the Template root so future runs can compare against prior work. Append a new entry for each optimization attempt and use this format:
+
+```markdown
+## YYYY-MM-DD - <initial deployment|iteration> - <short optimization name>
+
+- Benchmark command: `<exact command>`
+- Template root: `<path>`
+- Target: `<ssh-target or none>`
+- Representative edit: `<change type or n/a>`
+- Bottleneck hypothesis: <one sentence>
+- Diagnostic facts: <slowest non-cached step, first unexpected cache miss, context transfer size, or other relevant facts>
+- Optimization: <exact change made>
+- Baseline: <duration and key output facts>
+- After change: <duration and key output facts>
+- Result: <delta or inconclusive>
+- Caveats: <missing Target testing, unsupported build engine behavior, noisy timing, or none>
+```
+
+If an attempt stops before an after-change benchmark, still record the baseline, hypothesis, and blocker so the next run has context.
 
 ## Optimization Guidance
 
@@ -43,4 +66,3 @@ Before acting, read `references/topo-template-context.md` for shared Topo Templa
 ## Reporting
 
 Report the priority selected, benchmark command, bottleneck hypothesis, diagnostic fact that supported it, edited files, exact optimization made, measured before and after results, and why the chosen change was the smallest change likely to improve the selected benchmark. Include any caveats such as missing Target testing or unsupported build engine behavior.
-When benchmarking, record benchmarking results in `./template-benchmarking.md`. Create this if it doesn't exist, read it first if you find it in the repo. Use this to track results over time.
