@@ -63,6 +63,7 @@ Expensive steps increase build time and often layer size, which then increases t
 Aim to make expensive steps do less.
 
 For example:
+
 - Use `--no-install-recommends` with `apt`.
 - Keep minimal pinned dependency lists.
 - Use `--depth=1` for Git fetches.
@@ -71,6 +72,7 @@ For example:
 - Skip dependency groups you do not need.
 
 For `apt`:
+
 ```dockerfile
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -80,16 +82,19 @@ RUN apt-get update \
 ```
 
 For Git:
+
 ```sh
 git clone --depth=1 <repo>
 ```
 
 For west/Zephyr:
+
 ```sh
 west update --narrow -o=--depth=1
 ```
 
 For west configs, you can ignore unneeded module groups:
+
 ```sh
 west config manifest.group-filter -- "-hal,-Nordic,-ci" # replace with a filter for your use-case.
 ```
@@ -160,6 +165,7 @@ Build cache metadata and layers can be pushed to a container registry so they ca
 This is useful for any expensive layer, especially when building a layer takes longer than downloading it.
 
 Docker/nerdctl Compose example:
+
 ```yaml
 services:
   myapp:
@@ -182,13 +188,13 @@ Compared with a pre-baked base image:
 
 How Docker/BuildKit and Buildah caching differ:
 
-| | Docker/BuildKit | Buildah |
-|---|---|---|
-| What's cached | Operation graph + layer blobs | Full intermediate images |
-| Cache precision | Per-operation input checksums | Per-intermediate-image match |
-| Cache size | Compact, deduplicated | Heavier |
-| Cross-build sharing | Better, same operation can share cache | More limited |
-| Format | BuildKit-specific cache metadata + OCI blobs | Standard OCI images |
+|                     | Docker/BuildKit                              | Buildah                      |
+| ------------------- | -------------------------------------------- | ---------------------------- |
+| What's cached       | Operation graph + layer blobs                | Full intermediate images     |
+| Cache precision     | Per-operation input checksums                | Per-intermediate-image match |
+| Cache size          | Compact, deduplicated                        | Heavier                      |
+| Cross-build sharing | Better, same operation can share cache       | More limited                 |
+| Format              | BuildKit-specific cache metadata + OCI blobs | Standard OCI images          |
 
 Podman/Buildah caveats:
 
