@@ -3,45 +3,61 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const skills_dir = path.join(root, "skills");
-const context_path = path.join(
-  skills_dir,
-  "_shared",
-  "topo-template-context.md",
-);
-const reference_path = path.join("references", "topo-template-context.md");
 
 const check = process.argv.includes("--check");
-const canonical_context = fs.readFileSync(context_path, "utf8");
 
-const skill_paths = fs
-  .readdirSync(skills_dir, { withFileTypes: true })
-  .filter(
-    (entry) => entry.isDirectory() && entry.name.startsWith("topo-template-"),
-  )
-  .map((entry) => path.join(skills_dir, entry.name))
-  .filter((skill_dir) => fs.existsSync(path.join(skill_dir, "SKILL.md")));
+const shared_context_syncs = {
+  source: path.join(skills_dir, "_shared", "topo-template-context.md"),
+  destinations: fs
+    .readdirSync(skills_dir, { withFileTypes: true })
+    .filter(
+      (entry) => entry.isDirectory() && entry.name.startsWith("topo-template-"),
+    )
+    .map((entry) => path.join(skills_dir, entry.name))
+    .filter((skill_dir) => fs.existsSync(path.join(skill_dir, "SKILL.md")))
+    .map((skill_dir) =>
+      path.join(skill_dir, "references", "topo-template-context.md"),
+    ),
+};
+
+const specific_syncs = [
+  {
+    source: path.join(root, "docs", "Build Optimisation.md"),
+    destinations: [
+      path.join(
+        skills_dir,
+        "topo-template-optimize-deployment",
+        "references",
+        "docker-build-performance.md",
+      ),
+    ],
+  },
+];
+
+const all_syncs = [shared_context_syncs, ...specific_syncs];
 
 let stale = false;
 
-for (const skill_dir of skill_paths) {
-  const skill_reference_path = path.join(skill_dir, reference_path);
-  const relative_path = path.relative(root, skill_reference_path);
-  const reference_context_copy = fs.existsSync(skill_reference_path)
-    ? fs.readFileSync(skill_reference_path, "utf8")
-    : null;
+for (const { source, destinations } of all_syncs) {
+  const canonical = fs.readFileSync(source, "utf8");
 
-  if (reference_context_copy !== canonical_context) {
-    stale = true;
+  for (const dest of destinations) {
+    const relative_path = path.relative(root, dest);
+    const current = fs.existsSync(dest) ? fs.readFileSync(dest, "utf8") : null;
 
-    if (check) {
-      const state = reference_context_copy === null ? "missing" : "stale";
-      console.error(`${relative_path} is ${state}`);
-      continue;
+    if (current !== canonical) {
+      stale = true;
+
+      if (check) {
+        const state = current === null ? "missing" : "stale";
+        console.error(`${relative_path} is ${state}`);
+        continue;
+      }
+
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.writeFileSync(dest, canonical);
+      console.log(`Updated ${relative_path}`);
     }
-
-    fs.mkdirSync(path.dirname(skill_reference_path), { recursive: true });
-    fs.writeFileSync(skill_reference_path, canonical_context);
-    console.log(`Updated ${relative_path}`);
   }
 }
 
