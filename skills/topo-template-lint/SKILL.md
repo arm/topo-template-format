@@ -35,6 +35,7 @@ Run these checks in order. If the user asked you to fix issues, make the smalles
 - Prefer `check-jsonschema` because it validates YAML directly and is available from Homebrew as `brew install check-jsonschema`; on supported Ubuntu releases it may be available as `apt install python3-check-jsonschema`.
 - Do not install validators on the user's behalf. If no supported validator is installed, stop and tell the user to install one before continuing.
 - Treat schema errors as blocking issues. Fix schema errors before judging higher-level metadata intent.
+- `check-jsonschema` caches schemas by default. If fetching a schema with a floating tag (e.g. `main`), ensure you specify `--no-cache` to get the current version.
 
 ### 3. README Alignment
 
