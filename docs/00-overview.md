@@ -74,11 +74,11 @@ This allows Templates to be runnable with plain `docker compose` while Implement
 
 ## Spec Examples
 
-- <https://github.com/arm/Lightbulb-LLM-Heterogenous>
-- <https://github.com/arm/topo-armv9-cpu-llm-chat>
-- <https://github.com/arm/topo-kleidi-service>
-- <https://github.com/arm/topo-cortexa-welcome>
-- <https://github.com/arm/topo-simd-visual-benchmark>
+- [Lightbulb LLM Heterogenous](https://github.com/arm/Lightbulb-LLM-Heterogenous)
+- [Topo Armv9 CPU LLM Chat](https://github.com/arm/topo-armv9-cpu-llm-chat)
+- [Topo Kleidi Service](https://github.com/arm/topo-kleidi-service)
+- [Topo Cortex-A Welcome](https://github.com/arm/topo-cortexa-welcome)
+- [Topo SIMD Visual Benchmark](https://github.com/arm/topo-simd-visual-benchmark)
 
 ## Use Cases
 
