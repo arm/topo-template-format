@@ -1,6 +1,6 @@
 # Schema Compliance
 
-The [machine-readable schema](schema/topo-template-format.json) to check any project against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling.
+The [machine-readable schema](https://raw.githubusercontent.com/arm/topo-template-format/refs/heads/main/schema/topo-template-format.json) to check any project against is provided as a [JSON schema](https://json-schema.org/) and is therefore compatible with any supported tooling.
 
 ## Validating Schema Compliance in Your Editor
 

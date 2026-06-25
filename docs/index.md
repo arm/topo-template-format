@@ -8,4 +8,4 @@ Documentation for authoring, validating, and improving Topo Templates.
 - [Authoring templates](./01-authoring-templates.md)
 - [Parameterization](./02-parameterization.md)
 - [Schema compliance](./03-schema.md)
-- [Build optimisation](./Build%20Optimisation.md)
+- [Build optimisation](./Build Optimisation.md)
